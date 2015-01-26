@@ -32,6 +32,8 @@ module MassAlth
     end
 
     access_control.roles_for :admin do |role|
+      role.project_module :nodes, '/nodes'
+      role.project_module :node_ways, '/node_ways'
       role.project_module :delivers, '/delivers'
       role.project_module :accounts, '/accounts'
     end
