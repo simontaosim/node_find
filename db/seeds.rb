@@ -27,8 +27,8 @@ end
 
 shell.say ""
 
-deliver_num = shell.ask "你希望有几个快递员? "
+deliver_num = shell.ask "how many delivers do you wish?"
 $i= 1
 while $i <= deliver_num do
-	shell.say $i+'个'
+	shell.say "#{$i}"
 end
