@@ -31,5 +31,5 @@ deliver_num = shell.ask "how many delivers do you wish?"
 $i= 1
 while $i <= deliver_num.to_i do
 	shell.say "#{$i}"
-	$i++
+	$i += 1
 end
