@@ -16,6 +16,13 @@ gem 'rake'
 # Component requirements
 gem 'erubis', '~> 2.7.0'
 gem 'mongoid', '~>3.0.0'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
+gem 'rqrcode_png'
+gem "rmagick"
+gem 'i18n', '~> 0.6.11'
+gem 'json'
+gem 'rack-cors', :require => 'rack/cors'
 
 # Test requirements
 
