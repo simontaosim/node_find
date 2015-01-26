@@ -4,6 +4,8 @@ class Node
 
   # field <name>, :type => <type>, :default => <value>
   field :name, :type => String
+  field :address, :type => String
+  field :node_type, :type => String
 
   # You can define indexes on documents using the index macro:
   # index :field <, :unique => true>
