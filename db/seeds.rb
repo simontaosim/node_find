@@ -27,3 +27,8 @@ end
 
 shell.say ""
 
+deliver_num = shell.ask "how many delivers do you wish?"
+$i= 1
+while $i < deliver_num do
+	shell.say "#{$i}"
+end
