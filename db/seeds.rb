@@ -28,8 +28,8 @@ end
 shell.say ""
 
 deliver_num = shell.ask "你需要多少快递员?"
-if deliver_num.to_i == nil
-  shell.say "对不起请输入数字"
+if deliver_num.to_i == 0
+  shell.say "对不起请输入大于等于1的数字"
 
 end
 $i= 1

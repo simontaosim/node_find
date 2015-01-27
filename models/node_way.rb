@@ -6,8 +6,9 @@ class NodeWay
   field :node1, :type => String
   field :node2, :type => String
   field :fee, :type => Float
-  field :speed, :type => Integer
-  field :miles, :type => String
+  field :speed, :type => FLoat
+  field :miles, :type => Float
+  field :long, :type => Float
 
   # You can define indexes on documents using the index macro:
   # index :field <, :unique => true>
