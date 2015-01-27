@@ -27,7 +27,8 @@ end
 
 shell.say ""
 
-deliver_num = shell.ask "how many delivers do you wish?"
+deliver_num = shell.ask "你需要多少快递员?"
+shell.say "#{deliver_num.class}"
 $i= 1
 while $i <= deliver_num.to_i do
 	shell.say "#{$i}"
