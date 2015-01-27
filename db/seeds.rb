@@ -28,7 +28,10 @@ end
 shell.say ""
 
 deliver_num = shell.ask "你需要多少快递员?"
-shell.say "#{deliver_num.class}"
+if deliver_num.to_i == nil
+  shell.say "对不起请输入数字"
+
+end
 $i= 1
 while $i <= deliver_num.to_i do
 	shell.say "#{$i}"
