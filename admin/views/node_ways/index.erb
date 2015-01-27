@@ -41,6 +41,8 @@
                 <th class=header> <%= mat(:node_way, :node1) %></th>
                 <th class=header> <%= mat(:node_way, :node2) %></th>
                 <th class=header> <%= mat(:node_way, :fee) %></th>
+                <th class=header> <%= mat(:node_way, :miles) %></th>
+                <th class=header> <%= mat(:node_way, :longlast) %></th>
                 <th class="header list-row-action-header"></th>
       </tr>
     </thead>
@@ -56,6 +58,8 @@
           <td class=list-column> <%= node_way.node1 %> </td>
           <td class=list-column> <%= node_way.node2 %> </td>
           <td class=list-column> <%= node_way.fee %> </td>
+          <td class=list-column> <%= node_way.miles %> </td>
+          <td class=list-column> <%= node_way.longlast %> </td>
           <td class="list-column list-row-action">
             <div class='list-row-action-wrapper'>
                <%= link_to tag_icon(:edit), :href => url(:node_ways, :edit, :id => node_way.id), :rel => :tooltip, :title => "#{pat(:edit)} node_way", :class => 'list-row-action-wrapper-link' %>
