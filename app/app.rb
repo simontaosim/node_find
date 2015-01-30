@@ -61,5 +61,8 @@ module MassAlth
     #     render 'errors/500'
     #   end
     #
+    get '/' do
+    "Hello World"
+    end
   end
 end
