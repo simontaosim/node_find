@@ -1,0 +1,8 @@
+
+<h3>您注册的公司名是： <%= @company.name %></h3>
+<% form_tag url(:index, :create_delivers) do %>
+<%= label_tag '您需要多少快递员' %>
+<%= number_field_tag :deliver_num, min:"1", max:"25" %>
+<%= hidden_field_tag :company_id,value: @company._id %>
+<%= submit_tag :提交 %>
+<% end %>

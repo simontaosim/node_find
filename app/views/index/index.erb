@@ -1,0 +1,5 @@
+<h2><%= @error %></h2>
+<% form_for @company, url(:index, :create) do |f| %>
+<%= f.text_field :name, placeholder: '输入您的公司名' %>
+<%= f.submit '提交', class: 'button' %>
+<% end %>
