@@ -29,6 +29,7 @@ gem 'rack-cors', :require => 'rack/cors'
 
 # Padrino Stable Gem
 gem 'padrino', '0.12.4'
+gem 'thin'
 
 # Or Padrino Edge
 # gem 'padrino', :github => 'padrino/padrino-framework'

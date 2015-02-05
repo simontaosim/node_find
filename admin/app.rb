@@ -32,6 +32,7 @@ module MassAlth
     end
 
     access_control.roles_for :admin do |role|
+      role.project_module :companies, '/companies'
       role.project_module :deliver_signs, '/deliver_signs'
       role.project_module :node_types, '/node_types'
       role.project_module :nodes, '/nodes'

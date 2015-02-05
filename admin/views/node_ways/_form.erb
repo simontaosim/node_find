@@ -1,8 +1,16 @@
+<% error = @node_way.errors.include?(:company_id) %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label :company_id, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :company_id, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+    <span class='help-inline'><%= error ? f.error_message_on(:company_id) : "Ex: a simple text" %></span>
+  </div>
+</fieldset>
 <% error = @node_way.errors.include?(:node1) %>
 <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
   <%= f.label :node1, :class => 'control-label' %>
   <div class='controls'>
-    <%= f.text_field :node1, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+    <%= f.text_field :node1, :class => 'form-control input-xlarge input-with-feedback' %>
     <span class='help-inline'><%= error ? f.error_message_on(:node1) : "Ex: a simple text" %></span>
   </div>
 </fieldset>

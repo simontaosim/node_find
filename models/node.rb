@@ -2,14 +2,14 @@ class Node
   include Mongoid::Document
   include Mongoid::Timestamps # adds created_at and updated_at fields
   belongs_to :node_type
-  # field <name>, :type => <type>, :default => <value>
+  belongs_to :company
+  
   field :name, :type => String
-  field :address, :type => String
   field :node_type, :type => String
 
-  # You can define indexes on documents using the index macro:
-  # index :field <, :unique => true>
-
-  # You can create a composite key in mongoid to replace the default id using the key macro:
-  # key :field <, :another_field, :one_more ....>
+  def self.nodeInCompanyExist(name,company_id)
+  #判断一个区域在一个公司是否有
+   logger.info "调试："+name
+  	node = where(:company_id => company_id, :name => name).first
+  end
 end

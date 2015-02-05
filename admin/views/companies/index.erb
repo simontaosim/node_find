@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs">
-  <li class=active> <%= link_to tag_icon(:list, pat(:list)), url(:nodes, :index) %></li>
-  <li> <%= link_to tag_icon(:plus, pat(:new)), url(:nodes, :new) %></li>
+  <li class=active> <%= link_to tag_icon(:list, pat(:list)), url(:companies, :index) %></li>
+  <li> <%= link_to tag_icon(:plus, pat(:new)), url(:companies, :new) %></li>
 </ul>
 <div class=tabs-content>
   <table id=list class="table table-striped table-hover table-condensed">
@@ -25,8 +25,8 @@
                   <div class=arrow></div>
                   <h3 class=popover-title><%= pat(:delete_selected_title) %></h3>
                   <div class=popover-content>
-                    <% form_tag url(:nodes, :destroy_many), :method => :delete do %>
-                      <%=hidden_field_tag :node_ids, :'data-delete-many-ids' => true %>
+                    <% form_tag url(:companies, :destroy_many), :method => :delete do %>
+                      <%=hidden_field_tag :company_ids, :'data-delete-many-ids' => true %>
                       <%=submit_tag pat(:delete), :class =>'list-menu-popover-delete-selected-btn btn btn-danger btn-small' %>
                       <div class='btn btn-default btn-small cancel'><%= pat(:cancel) %></div>
                     <% end %>
@@ -36,37 +36,31 @@
             </ul>
           </div>
         </th>
-                <th class=header> <%= mat(:node, :created_at) %></th>
-                <th class=header> <%= mat(:node, :updated_at) %></th>
-                <th class=header> <%= mat(:node, :node_type_id) %></th>
-                <th class=header> <%= mat(:node, :company_id) %></th>
-                <th class=header> <%= mat(:node, :name) %></th>
-                <th class=header> <%= mat(:node, :node_type) %></th>
+                <th class=header> <%= mat(:company, :created_at) %></th>
+                <th class=header> <%= mat(:company, :updated_at) %></th>
+                <th class=header> <%= mat(:company, :name) %></th>
                 <th class="header list-row-action-header"></th>
       </tr>
     </thead>
 
     <tbody>
-      <% @nodes.each do |node| %>
+      <% @companies.each do |company| %>
         <tr class=list-row>
           <td class="list-column list-selectable">
-            <%= check_box_tag 'node_ids[]', :value => node.id, :class => 'list-selectable-checkbox' %>
+            <%= check_box_tag 'company_ids[]', :value => company.id, :class => 'list-selectable-checkbox' %>
            </td>
-          <td class=list-column> <%= time_ago_in_words node.created_at %></td>
-          <td class=list-column> <%= time_ago_in_words node.updated_at %></td>
-          <td class=list-column> <%= node.node_type_id %> </td>
-          <td class=list-column> <%= node.company_id %> </td>
-          <td class=list-column> <%= node.name %> </td>
-          <td class=list-column> <%= node.node_type %> </td>
+          <td class=list-column> <%= time_ago_in_words company.created_at %></td>
+          <td class=list-column> <%= time_ago_in_words company.updated_at %></td>
+          <td class=list-column> <%= company.name %> </td>
           <td class="list-column list-row-action">
             <div class='list-row-action-wrapper'>
-               <%= link_to tag_icon(:edit), :href => url(:nodes, :edit, :id => node.id), :rel => :tooltip, :title => "#{pat(:edit)} node", :class => 'list-row-action-wrapper-link' %>
-               <%= link_to tag_icon('trash-o'), :rel => :tooltip, :title => "#{pat(:delete)} node", :class => 'list-row-action-delete-one list-row-action-wrapper-link' %>
+               <%= link_to tag_icon(:edit), :href => url(:companies, :edit, :id => company.id), :rel => :tooltip, :title => "#{pat(:edit)} company", :class => 'list-row-action-wrapper-link' %>
+               <%= link_to tag_icon('trash-o'), :rel => :tooltip, :title => "#{pat(:delete)} company", :class => 'list-row-action-delete-one list-row-action-wrapper-link' %>
                <div class="popover list-row-action-popover-delete-one left">
                  <div class=arrow> </div>
-                 <h3 class=popover-title><%= pat(:delete, :model => "node") %></h3>
+                 <h3 class=popover-title><%= pat(:delete, :model => "company") %></h3>
                  <div class=popover-content>
-                   <%- form_tag url(:nodes, :destroy, :id => node.id), :method => :delete do %>
+                   <%- form_tag url(:companies, :destroy, :id => company.id), :method => :delete do %>
                      <%= submit_tag pat(:delete), :class =>'list-row-action-popover-delete-one-btn btn btn-danger btn-small' %>
                      <div class="btn btn-default btn-small cancel"><%= pat(:cancel) %></div>
                    <% end %>
