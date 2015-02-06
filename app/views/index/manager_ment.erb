@@ -32,8 +32,8 @@
 	<div><hr></div>	
 		<% @node_ways.each_with_index do |item, index| %>
 			<div class="row">
-				<div class="col-md-4"><%= Node.find(item.node_one).name %></div>
-				<div class="col-md-4"><%= Node.find(item.node_two).name %></div>
+				<div class="col-md-4"><%= Node.where(_id:item.node_one).first.name %></div>
+				<div class="col-md-4"><%= Node.where(_id:item.node_two).first.name %></div>
 				<div class="col-md-3"><%= item.longlast %>分钟</div>
 				<div class="col-md-1 delete_node_way" wayID="<%= item._id %>" >&times
 					
@@ -66,7 +66,7 @@
 	  </div>
 	  <% @nodes.each do |t| %>
 	  <div> 
-      <span><span>此区域到<strong style="color:red;"><%= t.name %></strong></span>区域所花费的时间</label><%= number_field_tag("time_cost"+t._id,options={min:"5", max:"120"} ) %>分钟</span>
+      <span><span>此区域到<strong style="color:red;"><%= t.name %></strong></span>区域所花费的时间</label><%= number_field_tag("time_cost"+t._id,options={min:"5", max:"120"} ) %>分钟(默认10分钟)</span>
       
 	  </div>
 	  <% end %>
@@ -124,7 +124,7 @@
       <div class="modal-body">
 			<h4>是否确认删除这两个区域及其距离关系？</h4>
 			<% form_tag url(:index, :delete_node_way) do %>
-			<%= hidden_field_tag :node_way_id %>
+			<%= hidden_field_tag :node_way_id, id: "node_way_id" %>
 			<%= hidden_field_tag :company_node_id, value: @company_node._id %>
         	<%= hidden_field_tag :company_id, value: @company._id %>
       </div>
@@ -162,6 +162,8 @@
 				$(this).css('cursor', 'pointer');
 			});
 			$(this).click(function(event) {
+				var node_way_id = $(this).attr("wayID");
+				$('#node_way_id').val(node_way_id);
 				$('.bs-confirm-modal-sm').modal('show');
 			});
 		});

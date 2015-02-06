@@ -61,7 +61,7 @@ MassAlth::App.controllers :index do
     @node.company_id = params[:company_id]
     if Node.nodeInCompanyExist(@node.name, @node.company_id)
        @error = '此区域已经存在'
-       @company_node = Node.find(params[:company_node_id])
+       @company_node = Node.where(_id:params[:company_node_id]).first
        @company = Company.where(_id:params[:company_id]).first
        @nodes = Node.where(company_id: params[:company_id])
        @node_ways = NodeWay.where(:company_id => params[:company_id])
@@ -71,22 +71,27 @@ MassAlth::App.controllers :index do
       @node.save
       @success = '创建区域成功'
        #建立完毕，输出页面对象
-      @company_node = Node.find(params[:company_node_id])
+      @company_node = Node.where(_id:params[:company_node_id]).first
       @company = Company.where(_id:params[:company_id]).first
       @nodes = Node.where(company_id: params[:company_id])
+      logger.info @company_node.to_json
+
       @nodes.each_with_index do |f,index|
       #logger.info params['time_cost'+f._id].to_s+'分钟'
         @node_way = NodeWay.new
         @node_way.node_one = @node._id
         @node_way.node_two = f._id
         @node_way.company_id = params[:company_id]
-        @node_way.longlast = params['time_cost'+f._id].to_i
+        time_cost = params['time_cost'+f._id]
+        if params['time_cost'+f._id]
+          #同一区域或者没有填写距离默认
+          time_cost = 10
+        end
+        @node_way.longlast = time_cost.to_i
         @node_way.save
-        logger.info @node_way.node1.to_json
       end
       
       @node_ways = NodeWay.where(company_id: params[:company_id])
-      logger.info @node_ways.to_json
       @new_settle = '新的快递点：'+'［'+@node.name+'］'+'已经建立'
       render 'index/manager_ment'
     end
@@ -95,13 +100,22 @@ MassAlth::App.controllers :index do
   end
 
   post :delete_node_way do
+      logger.info params[:node_way_id]
+      node_way = NodeWay.where(_id: params[:node_way_id]).first
+      if node_way
+        @new_settle = '［'+Node.find(node_way.node_one).name+'
+      ］到［'+Node.find(node_way.node_two).name+'］的距离删除成功!'
+        node_way.destroy
+      end
+      
+      #============================
+    #页面数据维持
       @node = Node.new
-      @company_node = Node.find(params[:company_node_id])
+      @company_node = Node.where(_id:params[:company_node_id]).first
       @company = Company.where(_id:params[:company_id]).first
       @nodes = Node.where(company_id: params[:company_id])
       @node_ways = NodeWay.where(company_id: params[:company_id])
-      logger.info @node_ways.to_json
-      @new_settle = '删除成功！'
+    #=============================
       render 'index/manager_ment'
 
   end

@@ -38,6 +38,8 @@
         </th>
                 <th class=header> <%= mat(:deliver, :created_at) %></th>
                 <th class=header> <%= mat(:deliver, :updated_at) %></th>
+                <th class=header> <%= mat(:deliver, :company_id) %></th>
+                <th class=header> <%= mat(:deliver, :deliver_id) %></th>
                 <th class=header> <%= mat(:deliver, :name) %></th>
                 <th class=header> <%= mat(:deliver, :mobile) %></th>
                 <th class=header> <%= mat(:deliver, :company) %></th>
@@ -53,6 +55,8 @@
            </td>
           <td class=list-column> <%= time_ago_in_words deliver.created_at %></td>
           <td class=list-column> <%= time_ago_in_words deliver.updated_at %></td>
+          <td class=list-column> <%= deliver.company_id %> </td>
+          <td class=list-column> <%= deliver.deliver_id %> </td>
           <td class=list-column> <%= deliver.name %> </td>
           <td class=list-column> <%= deliver.mobile %> </td>
           <td class=list-column> <%= deliver.company %> </td>
