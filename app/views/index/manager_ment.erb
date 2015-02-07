@@ -89,29 +89,22 @@
         <h4 class="modal-title" id="new_orderLabel">添加新订单</h4>
       </div>
       <div class="modal-body">
-        ...
+        <% form_for @order, url(:index, :create_order) do |f|%>
+			<%= hidden_field_tag :node_way_id, id: "node_way_id" %>
+			<%= hidden_field_tag :company_node_id, value: @company_node._id %>
+        	<%= hidden_field_tag :company_id, value: @company._id %>
+        	<%= label_tag :取货地点 %><%= text_field_tag :get_good_node_name %>
+        	<%= label_tag :送货地点 %><%= text_field_tag :deliver_node_name %>
+
       </div>
 	<div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary">确认添加</button>
+        <button type="submit" class="btn btn-primary">确认添加</button>
+      	<% end %>
 	</div>
 	</div>
 </div>
 <!--弹出框_添加距离 -->
-<div id="add_distance" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="Label" aria-hidden="true">
-	<div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="add_distanceLabel">添加新订单</h4>
-      </div>
-      <div class="modal-body">
-      </div>
-	<div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary">确认添加</button>
-	</div>
-	</div>
-</div>
 
 </div><!--end of container-->
 <div class="modal fade bs-confirm-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -164,7 +157,9 @@
 			$(this).click(function(event) {
 				var node_way_id = $(this).attr("wayID");
 				$('#node_way_id').val(node_way_id);
+				//alert($('#node_way_id').val());
 				$('.bs-confirm-modal-sm').modal('show');
+				$('.bs-confirm-modal-sm #node_way_id').val(node_way_id);
 			});
 		});
 		$("#sumbit_node_way_form").submit(function(event) {

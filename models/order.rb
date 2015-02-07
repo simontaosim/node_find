@@ -4,10 +4,12 @@ class Order
   belongs_to :deliver
 
   # field <name>, :type => <type>, :default => <value>
-  field :node1, :type => String
-  field :node2, :type => String
-  field :node3, :type => String
+  field :company_node, :type => String
+  field :get_goods_node, :type => String
+  field :delvier_node, :type => String
   field :status, :type =>Integer
+  field :receive_time, :type => DateTime
+  field :end_time, :type => DateTime
 
   # You can define indexes on documents using the index macro:
   # index :field <, :unique => true>

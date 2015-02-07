@@ -51,6 +51,7 @@ MassAlth::App.controllers :index do
     #公司区域创建完成
     @nodes = Node.where(company_id: params[:company_id])
     @node_ways = Node.where(:node1 => @company_node._id.to_s)
+    @order = Order.new
     render 'index/manager_ment'
   end#create_delivers
 
@@ -66,6 +67,7 @@ MassAlth::App.controllers :index do
        @nodes = Node.where(company_id: params[:company_id])
        @node_ways = NodeWay.where(:company_id => params[:company_id])
        @new_settle = '新的快递点：'+'建立失败'
+       @order = Order.new
        render 'index/manager_ment'
     else
       @node.save
@@ -74,8 +76,6 @@ MassAlth::App.controllers :index do
       @company_node = Node.where(_id:params[:company_node_id]).first
       @company = Company.where(_id:params[:company_id]).first
       @nodes = Node.where(company_id: params[:company_id])
-      logger.info @company_node.to_json
-
       @nodes.each_with_index do |f,index|
       #logger.info params['time_cost'+f._id].to_s+'分钟'
         @node_way = NodeWay.new
@@ -93,6 +93,7 @@ MassAlth::App.controllers :index do
       
       @node_ways = NodeWay.where(company_id: params[:company_id])
       @new_settle = '新的快递点：'+'［'+@node.name+'］'+'已经建立'
+      @order = Order.new
       render 'index/manager_ment'
     end
    
@@ -103,11 +104,12 @@ MassAlth::App.controllers :index do
       logger.info params[:node_way_id]
       node_way = NodeWay.where(_id: params[:node_way_id]).first
       if node_way
+        logger.info node_way.to_json
         @new_settle = '［'+Node.find(node_way.node_one).name+'
       ］到［'+Node.find(node_way.node_two).name+'］的距离删除成功!'
         node_way.destroy
       end
-      
+      logger.info node_way.to_json
       #============================
     #页面数据维持
       @node = Node.new
@@ -115,9 +117,24 @@ MassAlth::App.controllers :index do
       @company = Company.where(_id:params[:company_id]).first
       @nodes = Node.where(company_id: params[:company_id])
       @node_ways = NodeWay.where(company_id: params[:company_id])
+      @order = Order.new
     #=============================
+
       render 'index/manager_ment'
 
+  end
+
+  post :create_order do
+
+    #页面数据维持
+      @node = Node.new
+      @company_node = Node.where(_id:params[:company_node_id]).first
+      @company = Company.where(_id:params[:company_id]).first
+      @nodes = Node.where(company_id: params[:company_id])
+      @node_ways = NodeWay.where(company_id: params[:company_id])
+    #=============================
+    @order = Order.new
+    render 'index/manager_ment'
   end
 
 end
